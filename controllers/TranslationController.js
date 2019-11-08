@@ -29,6 +29,14 @@ class TranslationController{
             })
             .catch(next)
     }
+
+    static find(req, res, next){
+        Image.find()
+            .then(images =>{
+                res.status(200).json(images);
+            })
+            .catch(next)
+    }
 }
 
 module.exports = TranslationController
