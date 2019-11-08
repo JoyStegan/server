@@ -22,6 +22,6 @@ const imageSchema = new Schema({
         type: String,
         required: [true, 'Language is required']
     }
-})
+}, {timestamps: true})
 
 module.exports = mongoose.model('Image', imageSchema)
