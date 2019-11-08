@@ -1,5 +1,6 @@
 const imageToTextApi = require('../apis/imageTotext')
 const translateApi = require('../apis/translate')
+const Image = require('../models/Image')
 
 class TranslationController{
 
@@ -21,7 +22,10 @@ class TranslationController{
                 return translateApi.get(`/translate?key=trnsl.1.1.20191107T102920Z.d933306c7eb28579.215efaba6144008c524aaa63de6f174361196e17&lang=${langCode[index]}-id&text=${text}`)
             })
             .then(({ data }) =>{
-                 res.status(200).json({text: rawText, translation : data.text[0], coordinate })
+                 return Image.create({ url, text: rawText, translation : data.text[0], coordinate, lang: lib[index] })
+                })
+            .then(image =>{
+                res.status(200).json(image)
             })
             .catch(next)
     }
