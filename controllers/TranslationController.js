@@ -31,7 +31,7 @@ class TranslationController{
     }
 
     static find(req, res, next){
-        Image.find()
+        Image.find().sort({ updatedAt: -1 })
             .then(images =>{
                 res.status(200).json(images);
             })
